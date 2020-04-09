@@ -48,4 +48,10 @@ export default {
   }
 }
 </script>
-
+<style lang="scss">
+  .el-menu--horizontal {
+    .el-menu {
+      max-width: 200px;
+    }
+  }
+</style>

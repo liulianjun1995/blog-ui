@@ -5,6 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import categoryRouter from './modules/category'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -50,19 +51,7 @@ export const constantRoutes = [
     ]
   },
 
-  {
-    path: '/category',
-    component: Layout,
-    alwaysShow: true,
-    meta: { title: '学海无涯' },
-    children: [
-      {
-        path: 'PHP',
-        component: () => import('@/views/home/index'),
-        meta: { title: 'PHP' }
-      }
-    ]
-  },
+  categoryRouter,
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

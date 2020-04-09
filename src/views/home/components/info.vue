@@ -170,25 +170,25 @@ export default {
         color: #555;
         .iconfont {
           font-size: 2em;
-          &:hover {
-            color: #fff;
-          }
-          &:nth-child(1):hover {
-            background-color: #00b0fb;
-            border: 1px solid #00b0fb;
-          }
-          &:nth-child(2):hover {
-            background-color: #37649d;
-            border: 1px solid #37649d;
-          }
-          &:nth-child(3):hover {
-            background-color: #b22222;
-            border: 1px solid #b22222;
-          }
-          &:nth-child(4):hover {
-            background-color: #0a0203;
-            border: 1px solid #0a0203;
-          }
+        }
+        &:hover {
+          color: #fff;
+        }
+        &:nth-child(1):hover {
+          background-color: #00b0fb;
+          border: 1px solid #00b0fb;
+        }
+        &:nth-child(2):hover {
+          background-color: #37649d;
+          border: 1px solid #37649d;
+        }
+        &:nth-child(3):hover {
+          background-color: #b22222;
+          border: 1px solid #b22222;
+        }
+        &:nth-child(4):hover {
+          background-color: #0a0203;
+          border: 1px solid #0a0203;
         }
       }
     }

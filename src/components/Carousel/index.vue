@@ -28,6 +28,7 @@ export default {
   mounted() {
     const _this = this
     _this.fetchData()
+    _this.setCarouselSize()
     window.addEventListener('resize', _this.setCarouselSize, false)
   },
   destroyed() {
@@ -57,7 +58,6 @@ export default {
       background-color: #fff;
       border: 1px solid #ddd;
       padding: 5px;
-      margin-bottom: 15px;
       .el-carousel {
         overflow: hidden;
         cursor: pointer;

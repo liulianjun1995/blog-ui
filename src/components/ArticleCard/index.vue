@@ -1,9 +1,9 @@
 <template>
   <div class="article-card">
-    <span class="card-title">
+    <p class="card-title">
       <i class="iconfont" :class="icon" />
       {{ title }}
-    </span>
+    </p>
     <ul class="card-list">
       <template v-for="(item, index) in articles">
         <li :key="index">
@@ -19,17 +19,40 @@
 export default {
   name: 'ArticleCard',
   props: {
-    articles: {
-      type: Array,
-      default: () => []
-    },
-    icon: {
+    type: {
       type: String,
-      required: true
+      default: ''
+    }
+  },
+  data() {
+    return {
+      articles: []
+    }
+  },
+  computed: {
+    title() {
+      let title = ''
+      switch (this.type) {
+        case 'hot':
+          title = '热文排行'
+          break
+        case 'recommend':
+          title = '作者推荐'
+          break
+      }
+      return title
     },
-    title: {
-      type: String,
-      required: true
+    icon() {
+      let icon = ''
+      switch (this.type) {
+        case 'hot':
+          icon = 'el-icon-ali-huomiao'
+          break
+        case 'recommend':
+          icon = 'el-icon-ali-zan'
+          break
+      }
+      return icon
     }
   }
 }
@@ -42,7 +65,6 @@ export default {
     border: 1px solid #ddd;
     .card-title {
       width: 100%;
-      display: inline-block;
       background-color: #fff;
       line-height: 20px;
       padding: 10px;
