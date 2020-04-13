@@ -1,7 +1,6 @@
 @import './variables.scss';
 @import './headbar.scss';
 @import './transition.scss';
-@import './element-ui.scss';
 @import './iconfont.scss';
 
 body {
@@ -44,7 +43,7 @@ a:hover {
   text-decoration: none;
 }
 
-p {
+p, ul {
   margin: 0;
   padding: 0;
   border: 0;
@@ -73,11 +72,27 @@ div:focus {
     padding: 10px;
   }
 }
-
+.outline-outside-modal {
+  margin-top: $headBarHeight;
+}
+.outline-outside-footer {
+  margin-top: -$headBarHeight - 40 !important;
+}
 .hide {
   display: none;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .margin-bottom-xs {
   margin-bottom: 10px;
+}
+
+.margin-xs {
+  margin: 5px;
+}
+.padding-xs {
+  margin: 5px;
 }

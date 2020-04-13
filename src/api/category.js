@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-const prefix = '/category'
+const prefix = '/category/'
 
 export function ApiGetCategoryList(params) {
   return request({

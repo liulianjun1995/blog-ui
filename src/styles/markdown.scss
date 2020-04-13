@@ -1,0 +1,425 @@
+/deep/ {
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: .5em;
+    color: #abb2bf;
+    background: #282c34
+  }
+
+  .hljs-comment, .hljs-quote {
+    color: #8a9496;
+    font-style: italic
+  }
+
+  .hljs-doctag, .hljs-formula, .hljs-keyword {
+    color: #c678dd
+  }
+
+  .hljs-deletion, .hljs-name, .hljs-section, .hljs-selector-tag, .hljs-subst {
+    color: #e06c75
+  }
+
+  .hljs-literal {
+    color: #56b6c2
+  }
+
+  .hljs-addition, .hljs-attribute, .hljs-meta-string, .hljs-regexp, .hljs-string {
+    color: #98c379
+  }
+
+  .hljs-built_in, .hljs-class .hljs-title {
+    color: #e6c07b
+  }
+
+  .hljs-attr, .hljs-number, .hljs-selector-attr, .hljs-selector-class, .hljs-selector-pseudo, .hljs-template-variable, .hljs-type, .hljs-variable {
+    color: #d19a66
+  }
+
+  .hljs-bullet, .hljs-link, .hljs-meta, .hljs-selector-id, .hljs-symbol, .hljs-title {
+    color: #61aeee
+  }
+
+  .hljs-emphasis {
+    font-style: italic
+  }
+
+  .hljs-strong {
+    font-weight: 700
+  }
+
+  .hljs-link {
+    text-decoration: underline
+  }
+
+  .vue-marked {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    color: #636b6f;
+    overflow: hidden;
+    line-height: 2;
+    word-wrap: break-word
+  }
+
+  .vue-marked a {
+    background: transparent
+  }
+
+  .vue-marked a:active, .vue-marked a:hover {
+    outline: 0
+  }
+
+  .vue-marked ol li {
+    margin: 8px 0
+  }
+
+  .vue-marked pre[class*=language-] {
+    margin: 1.2em 0 !important
+  }
+
+  .vue-marked strong {
+    font-weight: 700
+  }
+
+  .vue-marked h1 {
+    font-size: 2em;
+    margin: .67em 0
+  }
+
+  .vue-marked img {
+    border: 0
+  }
+
+  .vue-marked hr {
+    box-sizing: content-box
+  }
+
+  .vue-marked table {
+    border-collapse: collapse;
+    border-spacing: 0
+  }
+
+  .vue-marked td, .vue-marked th {
+    padding: 0
+  }
+
+  .vue-marked * {
+    box-sizing: border-box
+  }
+
+  .vue-marked a {
+    color: #16a085;
+    text-decoration: none
+  }
+
+  .vue-marked a:active, .vue-marked a:focus, .vue-marked a:hover {
+    text-decoration: underline
+  }
+
+  .vue-marked hr {
+    height: 0;
+    margin: 15px 0;
+    overflow: hidden;
+    background: transparent;
+    border-bottom: 1px solid #ddd
+  }
+
+  .vue-marked hr:after, .vue-marked hr:before {
+    display: table;
+    content: " "
+  }
+
+  .vue-marked hr:after {
+    clear: both
+  }
+
+  .vue-marked h1, .vue-marked h2, .vue-marked h3, .vue-marked h4, .vue-marked h5, .vue-marked h6 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    line-height: 1.1
+  }
+
+  .vue-marked h1 {
+    font-size: 30px
+  }
+
+  .vue-marked h2 {
+    font-size: 21px
+  }
+
+  .vue-marked h3 {
+    font-size: 16px
+  }
+
+  .vue-marked h4 {
+    font-size: 14px
+  }
+
+  .vue-marked h5 {
+    font-size: 12px
+  }
+
+  .vue-marked h6 {
+    font-size: 11px
+  }
+
+  .vue-marked blockquote {
+    margin: 0
+  }
+
+  .vue-marked ol, .vue-marked ul {
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0
+  }
+
+  .vue-marked ol ol {
+    list-style-type: lower-roman
+  }
+
+  .vue-marked dd {
+    margin-left: 0
+  }
+
+  .vue-marked code, .vue-marked pre {
+    font-family: monaco, Consolas, Liberation Mono, Menlo, Courier, monospace;
+    font-size: 1em
+  }
+
+  .vue-marked pre {
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: auto
+  }
+
+  .vue-marked .markdown-body > :first-child {
+    margin-top: 0 !important
+  }
+
+  .vue-marked .markdown-body > :last-child {
+    margin-bottom: 0 !important
+  }
+
+  .vue-marked .anchor {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    padding-right: 6px;
+    padding-left: 30px;
+    margin-left: -30px
+  }
+
+  .vue-marked .anchor:focus {
+    outline: none
+  }
+
+  .vue-marked h1, .vue-marked h2, .vue-marked h3, .vue-marked h4, .vue-marked h5, .vue-marked h6 {
+    position: relative;
+    margin-top: 1em;
+    margin-bottom: 16px;
+    font-weight: 700;
+    line-height: 1.4
+  }
+
+  .vue-marked h1 {
+    font-size: 2.25em;
+    line-height: 1.2
+  }
+
+  .vue-marked h1, .vue-marked h2 {
+    padding-bottom: .3em;
+    border-bottom: 2px solid #eee
+  }
+
+  .vue-marked h2 {
+    font-size: 1.3em;
+    line-height: 1.225;
+  }
+
+  .vue-marked h3 {
+    font-size: 1.2em;
+    line-height: 1.43;
+  }
+
+  .vue-marked h4 {
+    font-size: 1.25em
+  }
+
+  .vue-marked h5 {
+    font-size: 1em
+  }
+
+  .vue-marked h6 {
+    font-size: 1em;
+    color: #777
+  }
+
+  .vue-marked blockquote, .vue-marked dl, .vue-marked ol, .vue-marked p, .vue-marked pre, .vue-marked table, .vue-marked ul {
+    margin-top: 0;
+    margin-bottom: 10px
+  }
+
+  .vue-marked hr {
+    height: 4px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0
+  }
+
+  .vue-marked ol, .vue-marked ul {
+    padding-left: 2em
+  }
+
+  .vue-marked ol ol, .vue-marked ol ul {
+    margin-top: 0;
+    margin-bottom: 0
+  }
+
+  .vue-marked li > p {
+    margin-top: 16px
+  }
+
+  .vue-marked dl {
+    padding: 0
+  }
+
+  .vue-marked dl dt {
+    padding: 0;
+    margin-top: 16px;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 700
+  }
+
+  .vue-marked dl dd {
+    padding: 0 16px;
+    margin-bottom: 16px
+  }
+
+  .vue-marked blockquote {
+    font-size: inherit;
+    padding: 0 15px;
+    color: #7f8c8d;
+    border-left: 4px solid #ecf0f1
+  }
+
+  .vue-marked blockquote > :first-child {
+    margin-top: 20px
+  }
+
+  .vue-marked blockquote > :last-child {
+    margin-bottom: 20px
+  }
+
+  .vue-marked blockquote {
+    margin: 20px 0 !important;
+    background-color: rgba(102, 128, 153, .03);
+    padding: 6px 8px
+  }
+
+  .vue-marked table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    margin: 25px 0
+  }
+
+  .vue-marked table th {
+    font-weight: 700
+  }
+
+  .vue-marked table td, .vue-marked table th {
+    padding: 6px 13px;
+    border: 1px solid #ddd
+  }
+
+  .vue-marked table tr {
+    background-color: #fff;
+    border-top: 1px solid #ccc
+  }
+
+  .vue-marked table tr:nth-child(2n) {
+    background-color: #f8f8f8
+  }
+
+  .vue-marked img {
+    max-width: 100%;
+    box-sizing: border-box
+  }
+
+  .vue-marked img:not(.emoji) {
+    border: 1px solid #ddd;
+    max-width: 95%;
+    box-shadow: 0 0 30px #ccc;
+    -moz-box-shadow: 0 0 30px #ccc;
+    -webkit-box-shadow: 0 0 30px #ccc;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-left: 2%
+  }
+
+  .vue-marked code {
+    margin: 0;
+    color: #c2627b;
+    background-color: rgba(0, 0, 0, .04);
+    border-radius: 3px;
+    background-color: #ecf0f1;
+    max-width: 740px;
+    overflow-x: auto
+  }
+
+  .vue-marked code:after, .vue-marked code:before {
+    letter-spacing: -.2em;
+    content: "\A0"
+  }
+
+  .vue-marked pre > code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+    color: #e6e8d3
+  }
+
+  .vue-marked .highlight {
+    margin-bottom: 16px
+  }
+
+  .vue-marked .highlight pre, .vue-marked pre {
+    padding: 14px;
+    overflow: auto;
+    line-height: 1.45;
+    background-color: #4e4e4e;
+    border-radius: 3px;
+    color: #fff;
+    border: none
+  }
+
+  .vue-marked .highlight pre {
+    margin-bottom: 0
+  }
+
+  .vue-marked pre {
+    word-wrap: normal
+  }
+
+  .vue-marked pre code {
+    padding: 0;
+    margin: 0;
+    overflow: initial;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0
+  }
+
+  .vue-marked pre code:after, .vue-marked pre code:before {
+    content: normal
+  }
+
+}

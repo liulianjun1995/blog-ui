@@ -14,7 +14,7 @@
       </template>
       <sidebar-item
         v-for="child in item.children"
-        v-show="!child.meta.hidden"
+        v-show="!child.hidden"
         :key="child.path"
         :is-nest="true"
         :item="child"
@@ -67,7 +67,7 @@ export default {
       if (this.mode === 'horizontal') {
         return {
           display: 'inline-block',
-          width: '120px'
+          width: '100px'
         }
       }
       return { }

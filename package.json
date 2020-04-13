@@ -15,6 +15,7 @@
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
   },
   "dependencies": {
+    "autocjs": "^2.0.1",
     "axios": "0.18.1",
     "element-ui": "2.13.0",
     "js-cookie": "2.2.0",
@@ -22,7 +23,10 @@
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",
     "vue": "2.6.10",
+    "vue-loading-overlay": "^3.3.2",
+    "vue-markdown-editor-orh": "^1.1.2",
     "vue-router": "3.0.6",
+    "vue-scroll-reveal": "^1.0.11",
     "vuex": "3.1.0"
   },
   "devDependencies": {
@@ -30,13 +34,13 @@
     "@babel/register": "7.0.0",
     "@vue/cli-plugin-babel": "3.6.0",
     "@vue/cli-plugin-eslint": "^3.9.1",
-    "@vue/cli-plugin-unit-jest": "3.6.3",
-    "@vue/cli-service": "3.6.0",
+    "@vue/cli-plugin-unit-jest": "^4.3.0",
+    "@vue/cli-service": "^4.3.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "autoprefixer": "^9.5.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
-    "babel-jest": "23.6.0",
+    "babel-jest": "^25.2.6",
     "chalk": "2.4.2",
     "connect": "3.6.6",
     "eslint": "5.15.3",

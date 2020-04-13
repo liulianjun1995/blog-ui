@@ -1,6 +1,4 @@
 module.exports = {
 
-  title: '榴莲君Blog',
-
-  sidebarLogo: true
+  title: '榴莲君'
 }

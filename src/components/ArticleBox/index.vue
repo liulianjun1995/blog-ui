@@ -4,8 +4,8 @@
       <i class="iconfont" :class="icon" />
       {{ title }}
     </p>
-    <div class="article-container">
-      <el-row v-for="article in articles" :key="article.id + 'top'" :gutter="10" class="article-item">
+    <div v-loading="loading" class="article-container margin-bottom-xs">
+      <el-row v-for="article in articles" :key="article.id + 'top'" v-scroll-reveal.reset :gutter="10" class="article-item">
         <el-col class="article-left" :span="6">
           <el-image
             class="article-cover"
@@ -16,7 +16,7 @@
         </el-col>
         <el-col class="article-right" :span="18">
           <div class="article-title">
-            <router-link class="read" :to="'/article/' + article.id" :title="article.title">{{ article.title }}</router-link>
+            <router-link class="read" :to="{ name: 'ArticleDetail', params: {id:article.id} }" :title="article.title">{{ article.title }}</router-link>
           </div>
           <div class="article-abstract" :title="article.abstract">
             {{ article.abstract }}
@@ -26,18 +26,18 @@
               <el-tooltip class="item" effect="dark" content="分类" placement="bottom">
                 <i class="el-icon-menu" />
               </el-tooltip>
-              <router-link class="tag-name" :to="'/category/' + article.category " :title="article.category">PHP</router-link>
+              <router-link class="article-name" :to="{ name: article.article }" :title="article.article">PHP</router-link>
             </span>
             <el-tooltip class="item" effect="dark" content="发布时间" placement="bottom">
               <span class="article-footer-icon">
                 <i class="iconfont el-icon-ali-clock" />
-                2020-04-09
+                {{ article.created_at }}
               </span>
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="浏览" placement="bottom">
               <span class="article-footer-icon">
                 <i class="iconfont el-icon-ali-read" />
-                666
+                {{ article.views }}
               </span>
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="评论" placement="bottom">
@@ -49,24 +49,27 @@
             <el-tooltip class="item" effect="dark" content="点赞" placement="bottom">
               <span class="article-footer-icon">
                 <i class="iconfont el-icon-ali-zan" />
-                666
+                {{ article.praises }}
               </span>
             </el-tooltip>
-            <router-link class="read" :to="'/article/' + article.id" title="阅读全文">阅读全文</router-link>
+            <router-link class="read" :to="{ name: 'ArticleDetail', params: {id: article.id} }" title="阅读全文">阅读全文</router-link>
           </div>
         </el-col>
       </el-row>
+      <EmptyBox v-if="articles.length === 0" />
     </div>
-    <div v-show="show" class="empty-box">
-      <p><i class="iconfont el-icon-ali-cry" /></p>
-      <p>暂时没有任何数据</p>
-    </div>
+    <pagination v-if="showPagination" class="text-center" :page-size="pageSize" :total="total" @currentPage="currentPage" />
   </div>
 </template>
 
 <script>
+import { ApiGetArticleList, ApiGetTopArticleList } from '@/api/article'
+import Pagination from '@/components/Pagination'
+import EmptyBox from '@/components/EmptyBox'
+
 export default {
   name: 'ArticleBox',
+  components: { Pagination, EmptyBox },
   props: {
     type: {
       type: String,
@@ -76,13 +79,22 @@ export default {
   data() {
     return {
       show: false,
-      loading: true,
-      articles: []
+      loading: false,
+      articles: [],
+      total: 0,
+      pageSize: 0,
+      query: {
+        page: 1,
+        category: ''
+      }
     }
   },
   computed: {
+    showPagination() {
+      return this.type === 'list' || this.type === 'new'
+    },
     title() {
-      let title = ''
+      var title = this.$route.meta.title
       switch (this.type) {
         case 'top':
           title = '置顶博文'
@@ -90,8 +102,9 @@ export default {
         case 'new':
           title = '最新博文'
           break
-        case 'category':
+        case 'article':
           title = '分类'
+          break
       }
       return title
     },
@@ -108,52 +121,54 @@ export default {
       return icon
     }
   },
+  watch: {
+    '$route': function() {
+      this.fetchData()
+    }
+  },
   mounted() {
     this.initPage()
   },
   methods: {
     initPage() {
+      this.query.page = 1
+      this.fetchData()
+    },
+    fetchData() {
+      if (this.$route.name !== 'ArticleAll') {
+        this.query.category = this.$route.name
+      } else {
+        this.query.category = ''
+      }
       switch (this.type) {
         case 'top':
           this.fetchTopArticles()
           break
         case 'new':
-          this.fetchNewArticles()
+        case 'list':
+          this.fetchArticles()
+          break
       }
     },
     fetchTopArticles() {
-      this.articles = [
-        { id: 'neEznMB4b9',
-          title: 'composer整理',
-          abstract: 'Composer 是 PHP5.3以上 的一个依赖管理工具。 包依赖管理意思就是：一个项目中引入某个包，而这个包又需要引入其他一些包',
-          cover: 'https://www.liulianjun.top/img/error-1.4628c045.jpg',
-          category: 'PHP'
-        },
-        {
-          id: 'AnXzeYzqNl',
-          title: 'laravel-admin  批量操作js报错',
-          abstract: '批量操作js报错 selectedRows is not defined',
-          cover: 'https://www.liulianjun.top/img/error-1.4628c045.jpg',
-          category: 'PHP'
-        }
-      ]
+      const _this = this
+      _this.loading = true
+      ApiGetTopArticleList(_this.query).then(res => {
+        _this.articles = res.data
+      }).then(() => { _this.loading = false })
     },
-    fetchNewArticles() {
-      this.articles = [
-        { id: 'neEznMB4b9',
-          title: 'composer整理',
-          abstract: 'Composer 是 PHP5.3以上 的一个依赖管理工具。 包依赖管理意思就是：一个项目中引入某个包，而这个包又需要引入其他一些包',
-          cover: 'https://www.liulianjun.top/img/error-1.4628c045.jpg',
-          category: 'PHP'
-        },
-        {
-          id: 'AnXzeYzqNl',
-          title: 'laravel-admin  批量操作js报错',
-          abstract: '批量操作js报错 selectedRows is not defined',
-          cover: 'https://www.liulianjun.top/img/error-1.4628c045.jpg',
-          category: 'PHP'
-        }
-      ]
+    fetchArticles() {
+      const _this = this
+      _this.loading = true
+      ApiGetArticleList(_this.query).then(res => {
+        _this.articles = res.items
+        _this.total = res.total
+        _this.pageSize = res.pageSize
+      }).then(() => { _this.loading = false })
+    },
+    currentPage(val) {
+      this.query.page = val
+      this.fetchData()
     }
   }
 }
@@ -179,8 +194,8 @@ export default {
       margin-right: 5px;
     }
     .el-icon-spin {
-      -webkit-animation: 'el-icon-spin' 2s infinite;
-      animation: 'el-icon-spin' 2s linear infinite;
+      -webkit-animation: el-icon-spin 2s infinite;
+      animation: el-icon-spin 2s linear infinite;
     }
     @keyframes el-icon-spin {
       0% {
@@ -197,9 +212,9 @@ export default {
     .article-item {
       padding: 15px;
       border-bottom: 1px solid #f2f2f2;
-      height: 150px;
+      height: 160px;
       @media screen and (max-width: 768px) {
-        height: 110px;
+        height: 120px;
       }
       .article-left {
         height: 100%;
@@ -224,7 +239,7 @@ export default {
           }
         }
         .article-abstract {
-          height: 70px;
+          height: 80px;
           font-size: 13px;
           line-height: 20px;
           color: #999;
@@ -234,7 +249,7 @@ export default {
           -webkit-line-clamp: 4;
           -webkit-box-orient: vertical;
           @media screen and (max-width: 768px) {
-            height: 40px;
+            height: 44px;
             -webkit-line-clamp: 2;
           }
         }
@@ -243,7 +258,7 @@ export default {
           height: 22px;
           line-height: 27px;
           font-size: 13px;
-          .category {
+          .article {
             @media screen and (max-width: 768px) {
               display: none;
             }
@@ -257,9 +272,9 @@ export default {
             .iconfont {
               font-size: 13px;
             }
-            .tag-name {
+            .article-name {
               color: #009688;
-              margin-right: 5px;
+              margin: 0 3px;
             }
           }
           .read {

@@ -137,22 +137,20 @@ export default {
       @media (min-width: 1200px) {
         width: 232px;
       }
-      padding: 0 10px;
+      padding: 0 20px;
       text-align: left;
       margin-bottom: 15px;
       .info-nickname {
         font-size: 28px;
         font-weight: 700;
-        margin: 0 10px 0 10px;
       }
       .info-introduce {
         font-size: 13px;
-        margin: 10px auto;
-        width: 90%;
+        margin: 14px auto;
+        height: 28px;
       }
       .info-location {
         color: grey;
-        margin: 0 10px;
       }
     }
     .info-contact {

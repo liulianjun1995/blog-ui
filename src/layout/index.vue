@@ -4,6 +4,12 @@
     <div class="main-container">
       <app-main />
     </div>
+    <footer-bar />
+
+    <el-tooltip placement="top" content="返回顶部">
+      <back-to-top :visibility-height="300" transition-name="fade" />
+    </el-tooltip>
+
     <el-drawer
       v-if="device === 'mobile'"
       ref="drawer"
@@ -22,13 +28,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { HeaderBar, AppMain } from './components'
+import { HeaderBar, AppMain, FooterBar } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 import Menu from '@/components/Menu'
+import BackToTop from '@/components/BackToTop'
 
 export default {
   name: 'Layout',
-  components: { HeaderBar, AppMain, Menu },
+  components: { HeaderBar, AppMain, FooterBar, Menu, BackToTop },
   mixins: [ResizeMixin],
   data() {
     return {

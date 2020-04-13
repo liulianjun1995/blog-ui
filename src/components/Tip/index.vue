@@ -73,6 +73,7 @@ export default {
       float: left;
     }
     .tips-content {
+      display: inline-block;
       height: 17px;
       line-height: 17px;
       overflow: hidden;
