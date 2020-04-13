@@ -106,7 +106,8 @@ export default {
         praises: 0,
         comments_count: 0,
         created_at: ''
-      }
+      },
+      navigation: null
     }
   },
   computed: {
@@ -161,7 +162,7 @@ export default {
       })
     },
     initDoc() {
-      new AutocJs({
+      const config = {
         // 文章正文 DOM 节点的 ID 选择器
         article: '#article',
         // 要收集的标题选择器
@@ -188,7 +189,12 @@ export default {
         isGenerateHeadingChapterCode: false,
         // 是否在正文的文章标题中创建锚点
         isGenerateHeadingAnchor: true
-      })
+      }
+      if (this.navigation !== null) {
+        this.navigation.reload(config)
+      } else {
+        this.navigation = new AutocJs(config)
+      }
     }
   }
 }
