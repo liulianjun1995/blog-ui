@@ -3,10 +3,11 @@
     <el-carousel ref="carousel" :height="carouselHeight + 'px'">
       <el-carousel-item v-for="(carousel, index) in carousels" :key="index">
         <p class="carousel-title">{{ carousel.title }}</p>
-        <el-image
+        <img
           style="width: 100%; height: 100%;"
           :src="carousel.img"
-        />
+          :alt="carousel.title"
+        >
       </el-carousel-item>
     </el-carousel>
   </div>

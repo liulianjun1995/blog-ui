@@ -7,12 +7,12 @@
     <div v-loading="loading" class="article-container margin-bottom-xs">
       <el-row v-for="article in articles" :key="article.id + 'top'" v-scroll-reveal.reset :gutter="10" class="article-item">
         <el-col class="article-left" :span="6">
-          <el-image
+          <img
             class="article-cover"
             style="width: 100%; height: 100%;"
             :src="article.cover"
-            :preview-src-list="[article.cover]"
-          />
+            :alt="article.title"
+          >
         </el-col>
         <el-col class="article-right" :span="18">
           <div class="article-title">
@@ -173,13 +173,6 @@ export default {
   }
 }
 </script>
-
-<style>
-  .article-cover img:hover {
-    transition: all .6s ease 0s;
-    transform: scale(1.1);
-  }
-</style>
 <style scoped lang="scss">
   .box-title {
     width: 100%;
@@ -218,6 +211,10 @@ export default {
       }
       .article-left {
         height: 100%;
+        .article-cover:hover {
+          transition: all .6s ease 0s;
+          transform: scale(1.1);
+        }
       }
       .article-right {
         text-align: left;
@@ -295,41 +292,6 @@ export default {
             }
           }
         }
-      }
-    }
-  }
-  .article {
-    padding: 15px;
-    position: relative;
-    overflow: hidden;
-    background: #fff;
-    border-bottom: 1px solid #f2f2f2;
-    .flag {
-      position: absolute;
-      height: 20px;
-      line-height: 20px;
-      text-align: center;
-      width: 74px;
-      background-color: #ff5722;
-      color: #fff;
-      z-index: 1;
-    }
-    .flag-left {
-      -webkit-transform: rotate(-45deg);
-      transform: rotate(-45deg);
-      left: -18px;
-      top: 9px;
-    }
-    .article-left {
-      width: 25%;
-      float: left;
-      overflow: hidden;
-      border: 1px solid #f2f2f2;
-      img {
-        width: 100%;
-        height: auto;
-        vertical-align: middle;
-        max-height: 130px;
       }
     }
   }
