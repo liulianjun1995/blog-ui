@@ -135,7 +135,7 @@ export default {
       this.fetchData()
     },
     fetchData() {
-      if (this.$route.name !== 'ArticleAll') {
+      if (['Home', 'ArticleAll'].includes(this.$route.name) === false) {
         this.query.category = this.$route.name
       } else {
         this.query.category = ''
