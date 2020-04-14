@@ -16,14 +16,13 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import HighLight from '@/highlight'
+Vue.use(HighLight)
+
 // loading
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 Vue.use(Loading)
-
-// markdown
-import vueMarkdownEditor from 'vue-markdown-editor-orh'
-Vue.use(vueMarkdownEditor)
 
 // scroll-reveal
 import VueScrollReveal from 'vue-scroll-reveal'

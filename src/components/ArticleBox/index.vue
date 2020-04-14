@@ -7,12 +7,11 @@
     <div v-loading="loading" class="article-container margin-bottom-xs">
       <el-row v-for="article in articles" :key="article.id + 'top'" v-scroll-reveal.reset :gutter="10" class="article-item">
         <el-col class="article-left" :span="6">
-          <img
+          <el-image
             class="article-cover"
             style="width: 100%; height: 100%;"
             :src="article.cover"
-            :alt="article.title"
-          >
+          />
         </el-col>
         <el-col class="article-right" :span="18">
           <div class="article-title">
@@ -211,7 +210,7 @@ export default {
       }
       .article-left {
         height: 100%;
-        .article-cover:hover {
+        .article-cover img:hover {
           transition: all .6s ease 0s;
           transform: scale(1.1);
         }

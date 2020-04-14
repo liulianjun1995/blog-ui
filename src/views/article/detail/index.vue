@@ -39,8 +39,8 @@
                 </span>
               </div>
               <div class="article-content-text">
-                <div id="article" class="article-detail-content">
-                  <vue-marked :value="article.content" />
+                <div id="article" class="article-detail-content markdown-body">
+                  <div v-highlight v-html="compileMarkdown" />
                 </div>
               </div>
             </div>
@@ -85,10 +85,23 @@
 import { ApiGetTopArticleDetail } from '@/api/article'
 import ArticleCard from '@/components/ArticleCard'
 import CategoryNav from '@/components/CategoryNav'
-import getPageTitle from '@/utils/get-page-title'
 import Breadcrumb from '@/components/Breadcrumb'
 import AutocJs from 'autocjs/dist/autoc.min'
+import Marked from 'marked'
+import getPageTitle from '@/utils/get-page-title'
 import { scrollTo } from '@/utils/scroll-to'
+
+const renderMd = new Marked.Renderer()
+Marked.setOptions({
+  renderer: renderMd,
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false
+})
 
 export default {
   name: 'ArticleInfo',
@@ -113,6 +126,9 @@ export default {
   computed: {
     id() {
       return this.$route.params.id.toString()
+    },
+    compileMarkdown() {
+      return Marked(this.article.content, { sanitize: true })
     },
     appendLevels() {
       return [
@@ -200,8 +216,6 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-  @import "../../../styles/markdown.scss";
-  /*@import "~vue-markdown-editor-orh/dist/css/index.css";*/
   @import "~autocjs/src/css/autoc.css";
 
   .article-info {
