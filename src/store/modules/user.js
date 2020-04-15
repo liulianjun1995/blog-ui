@@ -1,10 +1,9 @@
-import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
+import { logout, getInfo } from '@/api/user'
+import { removeToken } from '@/utils/auth'
 
 const getDefaultState = () => {
   return {
-    token: getToken(),
+    login: false,
     name: '',
     avatar: ''
   }
@@ -16,8 +15,8 @@ const mutations = {
   RESET_STATE: (state) => {
     Object.assign(state, getDefaultState())
   },
-  SET_TOKEN: (state, token) => {
-    state.token = token
+  SET_LOGIN: (state, login) => {
+    state.login = login
   },
   SET_NAME: (state, name) => {
     state.name = name
@@ -28,37 +27,25 @@ const mutations = {
 }
 
 const actions = {
-  // user login
-  login({ commit }, userInfo) {
-    const { username, password } = userInfo
-    return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  },
-
   // get user info
-  getInfo({ commit, state }) {
+  getInfo({ commit }) {
     return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
+      getInfo().then(response => {
         const { data } = response
 
         if (!data) {
-          reject('Verification failed, please Login again.')
+          reject()
         }
 
-        const { name, avatar } = data
+        const { nickname, avatar } = data
 
-        commit('SET_NAME', name)
+        commit('SET_NAME', nickname)
         commit('SET_AVATAR', avatar)
+        commit('SET_LOGIN', true)
         resolve(data)
       }).catch(error => {
+        removeToken()
+        commit('RESET_STATE')
         reject(error)
       })
     })
@@ -69,7 +56,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
         removeToken() // must remove  token  first
-        resetRouter()
         commit('RESET_STATE')
         resolve()
       }).catch(error => {

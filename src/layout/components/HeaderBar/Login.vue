@@ -1,16 +1,16 @@
 <template>
   <div class="login-content">
-    <template v-if="avatar">
+    <template v-if="login">
       <el-tooltip class="item" effect="dark" content="退出登录" placement="bottom">
-        <el-avatar class="avatar" :src="avatar" @click="logout" />
+        <el-avatar class="avatar" :src="avatar" @click.native="logout" />
       </el-tooltip>
     </template>
     <template v-else>
       <el-tooltip class="item" effect="dark" content="QQ登录" placement="bottom">
-        <i class="iconfont icon el-icon-ali-qq" />
+        <i class="iconfont icon el-icon-ali-qq hide" />
       </el-tooltip>
       <el-tooltip class="item" effect="dark" content="Github登录" placement="bottom">
-        <i class="iconfont icon el-icon-ali-github" />
+        <i class="iconfont icon el-icon-ali-github" @click="handleLogin('github')" />
       </el-tooltip>
     </template>
   </div>
@@ -23,13 +23,21 @@ export default {
   name: 'Login',
   computed: {
     ...mapGetters([
-      'avatar'
+      'avatar',
+      'login'
     ])
   },
   methods: {
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push({ path: '/' })
+    },
+    handleLogin(provider) {
+      switch (provider) {
+        case 'github':
+          window.location.href = 'http://blog.liulianjun.test/oauth/github/authorize'
+          break
+      }
     }
   }
 }
