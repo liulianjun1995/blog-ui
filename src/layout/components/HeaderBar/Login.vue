@@ -35,7 +35,7 @@ export default {
     handleLogin(provider) {
       switch (provider) {
         case 'github':
-          window.location.href = 'http://blog.liulianjun.test/oauth/github/authorize'
+          window.location.href = process.env.VUE_APP_URL + '/oauth/github/authorize'
           break
       }
     }
