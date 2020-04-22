@@ -34,10 +34,17 @@ import Carousel from '@/components/Carousel'
 import Info from './components/info'
 import ArticleCard from '@/components/ArticleCard'
 import ArticleBox from '@/components/ArticleBox'
+import { setToken } from '@/utils/auth'
 
 export default {
   name: 'Home',
-  components: { Tip, Carousel, Info, ArticleCard, ArticleBox }
+  components: { Tip, Carousel, Info, ArticleCard, ArticleBox },
+  mounted() {
+    if (this.$route.query.access_token) {
+      setToken(this.$route.query.access_token)
+      this.$router.push({ name: 'Home' })
+    }
+  }
 }
 </script>
 
