@@ -25,7 +25,7 @@
               <el-tooltip class="item" effect="dark" content="分类" placement="bottom">
                 <i class="el-icon-menu" />
               </el-tooltip>
-              <router-link class="article-name" :to="{ name: article.article }" :title="article.article">PHP</router-link>
+              <router-link class="article-name" :to="{ name: article.category }" :title="article.category">{{ article.category }}</router-link>
             </span>
             <el-tooltip class="item" effect="dark" content="发布时间" placement="bottom">
               <span class="article-footer-icon">
@@ -42,7 +42,7 @@
             <el-tooltip class="item" effect="dark" content="评论" placement="bottom">
               <span class="article-footer-icon">
                 <i class="iconfont el-icon-ali-message1" />
-                666
+                {{ article.comments_count }}
               </span>
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="点赞" placement="bottom">
@@ -210,9 +210,14 @@ export default {
       }
       .article-left {
         height: 100%;
-        .article-cover img:hover {
-          transition: all .6s ease 0s;
-          transform: scale(1.1);
+        /deep/ .article-cover {
+          img {
+            color: red;
+            &:hover {
+              transition: all .6s ease 0s;
+              transform: scale(1.1);
+            }
+          }
         }
       }
       .article-right {

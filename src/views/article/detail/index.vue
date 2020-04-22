@@ -40,7 +40,7 @@
               </div>
               <div class="article-content-text">
                 <div id="article" class="article-detail-content markdown-body">
-                  <div v-highlight v-html="compileMarkdown" />
+                  <Marked :markdown="article.content" />
                 </div>
               </div>
             </div>
@@ -86,27 +86,16 @@ import { ApiGetTopArticleDetail } from '@/api/article'
 import ArticleCard from '@/components/ArticleCard'
 import CategoryNav from '@/components/CategoryNav'
 import Breadcrumb from '@/components/Breadcrumb'
+import Marked from '@/components/Marked'
+
 import AutocJs from 'autocjs/dist/autoc.min'
-import Marked from 'marked'
 import getPageTitle from '@/utils/get-page-title'
 import { scrollTo } from '@/utils/scroll-to'
-
-const renderMd = new Marked.Renderer()
-Marked.setOptions({
-  renderer: renderMd,
-  gfm: true,
-  tables: true,
-  breaks: false,
-  pedantic: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false
-})
 
 export default {
   name: 'ArticleInfo',
   components: {
-    Breadcrumb, ArticleCard, CategoryNav
+    Breadcrumb, ArticleCard, CategoryNav, Marked
   },
   data() {
     return {
@@ -126,9 +115,6 @@ export default {
   computed: {
     id() {
       return this.$route.params.id.toString()
-    },
-    compileMarkdown() {
-      return Marked(this.article.content, { sanitize: true })
     },
     appendLevels() {
       return [
@@ -171,10 +157,9 @@ export default {
         Object.assign(_this.article, res.data)
         document.title = getPageTitle(_this.article.title)
         loading.hide()
+        scrollTo(0, 800)
       }).then(() => {
         this.initDoc()
-      }).then(() => {
-        scrollTo(0, 800)
       })
     },
     initDoc() {
