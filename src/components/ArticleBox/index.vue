@@ -27,26 +27,26 @@
               </el-tooltip>
               <router-link class="article-name" :to="{ name: article.category }" :title="article.category">{{ article.category }}</router-link>
             </span>
-            <el-tooltip class="item" effect="dark" content="发布时间" placement="bottom">
+            <el-tooltip effect="dark" content="发布时间" placement="bottom">
               <span class="article-footer-icon">
                 <i class="iconfont el-icon-ali-clock" />
                 {{ article.created_at }}
               </span>
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" content="浏览" placement="bottom">
-              <span class="article-footer-icon">
+            <el-tooltip effect="dark" content="浏览" placement="bottom">
+              <span class="article-footer-icon icon-statistical">
                 <i class="iconfont el-icon-ali-read" />
                 {{ article.views }}
               </span>
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" content="评论" placement="bottom">
-              <span class="article-footer-icon">
+            <el-tooltip effect="dark" content="评论" placement="bottom">
+              <span class="article-footer-icon icon-statistical">
                 <i class="iconfont el-icon-ali-message1" />
                 {{ article.comments_count }}
               </span>
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" content="点赞" placement="bottom">
-              <span class="article-footer-icon">
+            <el-tooltip effect="dark" content="点赞" placement="bottom">
+              <span class="article-footer-icon icon-statistical">
                 <i class="iconfont el-icon-ali-zan" />
                 {{ article.praises }}
               </span>
@@ -250,7 +250,7 @@ export default {
           -webkit-line-clamp: 4;
           -webkit-box-orient: vertical;
           @media screen and (max-width: 768px) {
-            height: 44px;
+            height: 43px;
             -webkit-line-clamp: 2;
           }
         }
@@ -259,11 +259,6 @@ export default {
           height: 22px;
           line-height: 27px;
           font-size: 13px;
-          .article {
-            @media screen and (max-width: 768px) {
-              display: none;
-            }
-          }
           .article-footer-icon {
             padding-right: 2%;
             font-size: 13px;
@@ -276,6 +271,11 @@ export default {
             .article-name {
               color: #009688;
               margin: 0 3px;
+            }
+          }
+          .icon-statistical {
+            @media screen and (max-width: 768px) {
+              display: none;
             }
           }
           .read {

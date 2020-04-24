@@ -28,12 +28,15 @@ export default {
   },
   computed: {
     compileMarkdown() {
-      return Marked(this.markdown)
+      return Marked(this.markdown).replace(/:.*?:/g, this.emoji)
+    }
+  },
+  methods: {
+    emoji(word) {
+      const type = word.substring(1, word.length - 1)
+      return `<span class="emoji-item-common emoji-${type} emoji-size-small" ></span>`
     }
   }
 }
 </script>
 
-<style scoped>
-
-</style>

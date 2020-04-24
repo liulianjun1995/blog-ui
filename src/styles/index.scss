@@ -2,6 +2,7 @@
 @import './headbar.scss';
 @import './transition.scss';
 @import './iconfont.scss';
+@import './emoji.scss';
 
 body {
   height: 100%;
@@ -84,6 +85,14 @@ div:focus {
 
 .text-center {
   text-align: center;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.margin-right-xs {
+  margin-right: 10px;
 }
 
 .margin-bottom-xs {

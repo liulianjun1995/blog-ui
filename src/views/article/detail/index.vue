@@ -50,16 +50,41 @@
                   <i class="iconfont el-icon-ali-zan" />
                   点赞（{{ article.praises }}）
                 </a>
-                <el-tooltip class="item" effect="dark" content="Thanks♪(･ω･)ﾉ" placement="top">
-                  <a href="javascript:" class="reward">
-                    赏
-                  </a>
-                </el-tooltip>
                 <a href="javascript:" class="component share">
                   <i class="iconfont el-icon-ali-share" />
                   分享（2）
                 </a>
               </div>
+            </div>
+          </div>
+          <div class="comment-composing-box margin-bottom-xs">
+            <el-divider content-position="left">来说两句吧</el-divider>
+            <el-input
+              v-model="comment"
+              class="margin-bottom-xs"
+              type="textarea"
+              :rows="5"
+              placeholder="请输入内容"
+            />
+            <div class="comment-textarea-footer">
+              <el-tooltip class="item" effect="dark" content="emoji 表情" placement="top">
+                <svg-icon icon-class="smile" class="cursor-pointer margin-right-xs" @click="showEmoji = !showEmoji" />
+              </el-tooltip>
+              <el-tooltip class="item" effect="dark" content="支持markdown" placement="top">
+                <a href="javascript:">支持 MD</a>
+              </el-tooltip>
+              <el-button style="float: right" size="small" type="primary">提交评论</el-button>
+              <emoji-panel v-if="showEmoji" @emojiClick="appendEmoji" />
+            </div>
+            <div class="comment-preview">
+              <Marked :markdown="comment" />
+            </div>
+          </div>
+          <div class="comment-card margin-bottom-xs">
+            <div class="card-title">最新评论</div>
+            <div class="comment-empty">
+              <p><i class="iconfont el-icon-ali-book" /></p>
+              <p>暂无评论，大侠不妨来一发？</p>
             </div>
           </div>
         </el-col>
@@ -87,6 +112,7 @@ import ArticleCard from '@/components/ArticleCard'
 import CategoryNav from '@/components/CategoryNav'
 import Breadcrumb from '@/components/Breadcrumb'
 import Marked from '@/components/Marked'
+import EmojiPanel from '@/components/EmojiPanel'
 
 import AutocJs from 'autocjs/dist/autoc.min'
 import getPageTitle from '@/utils/get-page-title'
@@ -95,7 +121,7 @@ import { scrollTo } from '@/utils/scroll-to'
 export default {
   name: 'ArticleInfo',
   components: {
-    Breadcrumb, ArticleCard, CategoryNav, Marked
+    Breadcrumb, ArticleCard, CategoryNav, Marked, EmojiPanel
   },
   data() {
     return {
@@ -109,7 +135,9 @@ export default {
         comments_count: 0,
         created_at: ''
       },
-      navigation: null
+      navigation: null,
+      comment: '',
+      showEmoji: false
     }
   },
   computed: {
@@ -144,6 +172,7 @@ export default {
   },
   methods: {
     fetchData() {
+      scrollTo(0, 800)
       const _this = this
       const loading = _this.$loading.show({
         container: null,
@@ -157,7 +186,6 @@ export default {
         Object.assign(_this.article, res.data)
         document.title = getPageTitle(_this.article.title)
         loading.hide()
-        scrollTo(0, 800)
       }).then(() => {
         this.initDoc()
       })
@@ -196,6 +224,9 @@ export default {
       } else {
         this.navigation = new AutocJs(config)
       }
+    },
+    appendEmoji(text) {
+      this.comment += ':' + text + ':'
     }
   }
 }
@@ -204,7 +235,7 @@ export default {
   @import "~autocjs/src/css/autoc.css";
 
   .article-info {
-    min-height: 700px;
+    height: 100%;
     margin: 0 auto;
     -webkit-box-shadow: 0 0 10px 2px #666;
     box-shadow: 0 0 10px 2px #666;
@@ -278,12 +309,12 @@ export default {
           position: relative;
           width: 300px;
           .component {
+            text-indent: 1em;
             padding: 12px 14px;
             color: #fff;
             font-size: 14px;
           }
           .praise {
-            text-indent: 1em;
             border-top-left-radius: 50px;
             border-bottom-left-radius: 50px;
             background: -webkit-gradient(linear,left top,right top,from(#ff5722),to(#f78d6b));
@@ -292,22 +323,7 @@ export default {
               background: #ff5722;
             }
           }
-          .reward {
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            color: #fff;
-            position: absolute;
-            left: 135px;
-            top: -10px;
-            border: 3px solid #fff;
-            background-color: #1e9fff;
-            font-size: 16px;
-            display: inline-block;
-          }
           .share {
-            text-indent: 1em;
             border-top-right-radius: 50px;
             border-bottom-right-radius: 50px;
             background: -webkit-gradient(linear,left top,right top,from(#ffd362),to(#ffb800));
@@ -315,6 +331,58 @@ export default {
             &:hover {
               background: #ffb800;
             }
+          }
+        }
+      }
+    }
+    .comment-composing-box {
+      position: relative;
+      padding: 15px;
+      background-color: #fff;
+      .el-divider__text {
+        font-size: 18px;
+        padding: 0 10px;
+      }
+      .comment-textarea-footer {
+        position: relative;
+        height: 32px;
+        line-height: 32px;
+        a {
+          font-size: 15px;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      .comment-preview {
+        border: 1px dashed rgb(204, 204, 204);
+        background: rgb(255, 255, 255);
+        border-radius: 6px;
+        box-shadow: none;
+        margin-top: 20px;
+        margin-bottom: 6px;
+        padding: 20px;
+      }
+    }
+    .comment-card {
+      padding: 15px;
+      background-color: #fff;
+      .card-title {
+        border-bottom: 1px solid #eaeaea;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 40px;
+        padding: 0 15px;
+      }
+      .comment-empty {
+        padding: 25px 15px;
+        text-align: center;
+        font-size: 18px;
+        p {
+          margin: 14px 0;
+          .el-icon-ali-book {
+            font-size: 50px;
+            color: #5fb878;
           }
         }
       }

@@ -137,7 +137,7 @@ export default {
       @media (min-width: 1200px) {
         width: 232px;
       }
-      padding: 0 20px;
+      padding-left: 20px;
       text-align: left;
       margin-bottom: 15px;
       .info-nickname {
