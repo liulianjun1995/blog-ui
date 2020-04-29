@@ -40,7 +40,7 @@
               </div>
               <div class="article-content-text">
                 <div id="article" class="article-detail-content markdown-body">
-                  <Marked :markdown="article.content" />
+                  <marked :markdown="article.content" />
                 </div>
               </div>
             </div>
@@ -59,26 +59,7 @@
           </div>
           <div class="comment-composing-box margin-bottom-xs">
             <el-divider content-position="left">来说两句吧</el-divider>
-            <el-input
-              v-model="comment"
-              class="margin-bottom-xs"
-              type="textarea"
-              :rows="5"
-              placeholder="请输入内容"
-            />
-            <div class="comment-textarea-footer">
-              <el-tooltip class="item" effect="dark" content="emoji 表情" placement="top">
-                <svg-icon icon-class="smile" class="cursor-pointer margin-right-xs" @click="showEmoji = !showEmoji" />
-              </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="支持markdown" placement="top">
-                <a href="javascript:">支持 MD</a>
-              </el-tooltip>
-              <el-button style="float: right" size="small" type="primary">提交评论</el-button>
-              <emoji-panel v-if="showEmoji" @emojiClick="appendEmoji" />
-            </div>
-            <div class="comment-preview">
-              <Marked :markdown="comment" />
-            </div>
+            <reply-editor v-model="comment" />
           </div>
           <div class="comment-card margin-bottom-xs">
             <div class="card-title">最新评论</div>
@@ -112,7 +93,7 @@ import ArticleCard from '@/components/ArticleCard'
 import CategoryNav from '@/components/CategoryNav'
 import Breadcrumb from '@/components/Breadcrumb'
 import Marked from '@/components/Marked'
-import EmojiPanel from '@/components/EmojiPanel'
+import ReplyEditor from '@/components/ReplyEditor'
 
 import AutocJs from 'autocjs/dist/autoc.min'
 import getPageTitle from '@/utils/get-page-title'
@@ -121,7 +102,7 @@ import { scrollTo } from '@/utils/scroll-to'
 export default {
   name: 'ArticleInfo',
   components: {
-    Breadcrumb, ArticleCard, CategoryNav, Marked, EmojiPanel
+    Breadcrumb, ArticleCard, CategoryNav, Marked, ReplyEditor
   },
   data() {
     return {
@@ -136,8 +117,7 @@ export default {
         created_at: ''
       },
       navigation: null,
-      comment: '',
-      showEmoji: false
+      comment: ''
     }
   },
   computed: {
@@ -224,9 +204,6 @@ export default {
       } else {
         this.navigation = new AutocJs(config)
       }
-    },
-    appendEmoji(text) {
-      this.comment += ':' + text + ':'
     }
   }
 }
@@ -342,26 +319,6 @@ export default {
       .el-divider__text {
         font-size: 18px;
         padding: 0 10px;
-      }
-      .comment-textarea-footer {
-        position: relative;
-        height: 32px;
-        line-height: 32px;
-        a {
-          font-size: 15px;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-      .comment-preview {
-        border: 1px dashed rgb(204, 204, 204);
-        background: rgb(255, 255, 255);
-        border-radius: 6px;
-        box-shadow: none;
-        margin-top: 20px;
-        margin-bottom: 6px;
-        padding: 20px;
       }
     }
     .comment-card {
