@@ -1,14 +1,12 @@
 <template>
   <div class="article-info">
     <div class="article-container">
-      <el-row>
-        <el-col :span="24">
-          <breadcrumb :append-levels="appendLevels" />
-        </el-col>
+      <el-row class="margin-bottom-xs">
+        <breadcrumb :append-levels="appendLevels" />
       </el-row>
       <el-row :gutter="10">
         <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
-          <div class="left-box">
+          <el-card class="box-card left-box margin-bottom-xs" shadow="never">
             <div class="article-content">
               <div class="article-content-tool">
                 <div>
@@ -44,30 +42,17 @@
                 </div>
               </div>
             </div>
-            <div class="article-component">
-              <div class="component-box">
-                <a href="javascript:" class="component praise">
-                  <i class="iconfont el-icon-ali-zan" />
-                  点赞（{{ article.praises }}）
-                </a>
-                <a href="javascript:" class="component share">
-                  <i class="iconfont el-icon-ali-share" />
-                  分享（2）
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="comment-composing-box margin-bottom-xs">
-            <el-divider content-position="left">来说两句吧</el-divider>
-            <reply-editor v-model="comment" />
-          </div>
-          <div class="comment-card margin-bottom-xs">
+            <article-component :praises="article.praises" :shares="article.shares" />
+          </el-card>
+          <reply-editor v-model="comment_content" class="comment-composing-box margin-bottom-xs" />
+          <el-card class="comment-card margin-bottom-xs" shadow="never">
             <div class="card-title">最新评论</div>
-            <div class="comment-empty">
+            <div v-if="false" class="comment-empty">
               <p><i class="iconfont el-icon-ali-book" /></p>
               <p>暂无评论，大侠不妨来一发？</p>
             </div>
-          </div>
+            <comment-box class="comment-content" :comments="article.comments" />
+          </el-card>
         </el-col>
         <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
           <el-row :gutter="10">
@@ -94,15 +79,16 @@ import CategoryNav from '@/components/CategoryNav'
 import Breadcrumb from '@/components/Breadcrumb'
 import Marked from '@/components/Marked'
 import ReplyEditor from '@/components/ReplyEditor'
+import ArticleComponent from './components/ArticleComponent'
+import CommentBox from './components/CommentBox'
 
 import AutocJs from 'autocjs/dist/autoc.min'
 import getPageTitle from '@/utils/get-page-title'
-import { scrollTo } from '@/utils/scroll-to'
 
 export default {
   name: 'ArticleInfo',
   components: {
-    Breadcrumb, ArticleCard, CategoryNav, Marked, ReplyEditor
+    Breadcrumb, ArticleCard, CategoryNav, Marked, ReplyEditor, ArticleComponent, CommentBox
   },
   data() {
     return {
@@ -114,10 +100,67 @@ export default {
         views: 0,
         praises: 0,
         comments_count: 0,
-        created_at: ''
+        created_at: '',
+        comments: [
+          {
+            id: 1,
+            user: { id: 1, nickname: '莫甘娜', avatar: 'https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png' },
+            content: '凯尔，你被自己的光芒变的盲目。',
+            created_at: '4小时前',
+            showReply: true,
+            replys: [
+              {
+                id: 2,
+                user: { id: 2, nickname: '凯尔', avatar: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg' },
+                content: '凯尔，你被自己的光芒变的盲目。',
+                created_at: '3小时前'
+              },
+              {
+                id: 3,
+                user: { id: 3, nickname: '瓦洛兰之盾-塔里克', avatar: 'https://ossweb-img.qq.com/images/lol/img/champion/Taric.png' },
+                content: '塔里克是保护者星灵，用超乎寻常的力量守护着符文之地的生命、仁爱以及万物之美。塔里克由于渎职而被放逐，离开了祖国德玛西亚，前去攀登巨神峰寻找救赎，但他找到的却是来自星界的更高层的召唤。现在的塔里克与古代巨神族的神力相融合，以瓦洛兰之盾的身份，永不疲倦地警惕着阴险狡诈的虚空腐化之力。',
+                created_at: '3小时前'
+              },
+              {
+                id: 4,
+                user: { id: 4, nickname: '伊泽瑞尔', avatar: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big81007.jpg' },
+                content: '等我回来一个打十个。',
+                created_at: '3小时前'
+              }
+            ]
+          },
+          {
+            id: 2,
+            user: { id: 1, nickname: '莫甘娜', avatar: 'https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png' },
+            content: '凯尔，你被自己的光芒变的盲目。',
+            created_at: '4小时前',
+            showReply: true,
+            replys: [
+              {
+                id: 2,
+                user: { id: 2, nickname: '凯尔', avatar: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg' },
+                content: '凯尔，你被自己的光芒变的盲目。',
+                created_at: '3小时前'
+              },
+              {
+                id: 3,
+                user: { id: 3, nickname: '瓦洛兰之盾-塔里克', avatar: 'https://ossweb-img.qq.com/images/lol/img/champion/Taric.png' },
+                content: '塔里克是保护者星灵，用超乎寻常的力量守护着符文之地的生命、仁爱以及万物之美。塔里克由于渎职而被放逐，离开了祖国德玛西亚，前去攀登巨神峰寻找救赎，但他找到的却是来自星界的更高层的召唤。现在的塔里克与古代巨神族的神力相融合，以瓦洛兰之盾的身份，永不疲倦地警惕着阴险狡诈的虚空腐化之力。',
+                created_at: '3小时前'
+              },
+              {
+                id: 4,
+                user: { id: 4, nickname: '伊泽瑞尔', avatar: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big81007.jpg' },
+                content: '等我回来一个打十个。',
+                created_at: '3小时前'
+              }
+            ]
+          }
+        ]
       },
       navigation: null,
-      comment: ''
+      comment_content: '',
+      reply_content: ''
     }
   },
   computed: {
@@ -152,7 +195,6 @@ export default {
   },
   methods: {
     fetchData() {
-      scrollTo(0, 800)
       const _this = this
       const loading = _this.$loading.show({
         container: null,
@@ -221,9 +263,7 @@ export default {
       .article-content {
         min-height: 600px;
         background: #fff;
-        padding: 10px 15px;
         overflow-x: hidden;
-        border: 1px solid #ddd;
         .article-content-tool {
           height: 24px;
           line-height: 24px;
@@ -275,55 +315,12 @@ export default {
           }
         }
       }
-      .article-component {
-        border: 1px solid #ddd;
-        margin-bottom: 15px;
-        padding: 20px 0;
-        background-color: #fff;
-        .component-box {
-          margin: 0 auto;
-          text-align: center;
-          position: relative;
-          width: 300px;
-          .component {
-            text-indent: 1em;
-            padding: 12px 14px;
-            color: #fff;
-            font-size: 14px;
-          }
-          .praise {
-            border-top-left-radius: 50px;
-            border-bottom-left-radius: 50px;
-            background: -webkit-gradient(linear,left top,right top,from(#ff5722),to(#f78d6b));
-            background: linear-gradient(90deg,#ff5722,#f78d6b);
-            &:hover {
-              background: #ff5722;
-            }
-          }
-          .share {
-            border-top-right-radius: 50px;
-            border-bottom-right-radius: 50px;
-            background: -webkit-gradient(linear,left top,right top,from(#ffd362),to(#ffb800));
-            background: linear-gradient(90deg,#ffd362,#ffb800);
-            &:hover {
-              background: #ffb800;
-            }
-          }
-        }
-      }
     }
     .comment-composing-box {
       position: relative;
-      padding: 15px;
       background-color: #fff;
-      .el-divider__text {
-        font-size: 18px;
-        padding: 0 10px;
-      }
     }
     .comment-card {
-      padding: 15px;
-      background-color: #fff;
       .card-title {
         border-bottom: 1px solid #eaeaea;
         font-size: 15px;

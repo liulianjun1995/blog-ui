@@ -1,5 +1,5 @@
 <template>
-  <div class="tips">
+  <el-card class="tips" shadow="never">
     <i class="iconfont el-icon-ali-volume-up" />
     <div class="tips-content">
       <template v-for="(tip, tip_index) in tips">
@@ -16,7 +16,7 @@
         </transition>
       </template>
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -62,6 +62,9 @@ export default {
 
 <style scoped lang="scss">
   .tips {
+    /deep/ .el-card__body {
+      padding: unset;
+    }
     border: 1px solid #ddd;
     padding: 10px 10px;
     background: #fff;

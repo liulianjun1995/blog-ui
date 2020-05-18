@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <el-card shadow="never">
+    <el-divider content-position="left">来说两句吧</el-divider>
     <el-input
       v-model="markdown"
       class="margin-bottom-xs"
@@ -21,7 +22,7 @@
     <div v-if="showPreview" class="reply-preview">
       <marked :markdown="markdown" />
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -71,6 +72,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .el-divider__text {
+    font-size: 18px;
+    padding: 0 10px;
+  }
   .reply-textarea-footer {
     position: relative;
     height: 32px;

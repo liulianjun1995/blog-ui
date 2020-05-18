@@ -1,5 +1,5 @@
 <template>
-  <div class="article-card">
+  <el-card class="article-card" shadow="never">
     <p class="card-title">
       <i class="iconfont" :class="icon" />
       {{ title }}
@@ -13,7 +13,7 @@
       </template>
     </ul>
     <EmptyBox v-else />
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -104,6 +104,9 @@ export default {
 
 <style scoped lang="scss">
   .article-card {
+    /deep/ .el-card__body {
+      padding: unset;
+    }
     background: #fff;
     height: 100%;
     border: 1px solid #ddd;

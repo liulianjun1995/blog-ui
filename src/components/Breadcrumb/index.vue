@@ -1,11 +1,13 @@
 <template>
-  <el-breadcrumb separator-class="el-icon-arrow-right">
-    <i class="icon el-icon-location-outline" />
-    <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path">
-      <span v-if="item.redirect==='noRedirect'|| index === levelList.length - 1" class="no-redirect">{{ item.meta.title }}</span>
-      <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
-    </el-breadcrumb-item>
-  </el-breadcrumb>
+  <el-card class="breadcrumb" shadow="never">
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <i class="icon el-icon-location-outline" />
+      <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path">
+        <span v-if="item.redirect==='noRedirect'|| index === levelList.length - 1" class="no-redirect">{{ item.meta.title }}</span>
+        <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
+      </el-breadcrumb-item>
+    </el-breadcrumb>
+  </el-card>
 </template>
 
 <script>
@@ -74,12 +76,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .breadcrumb {
+    /deep/ .el-card__body {
+      padding: unset;
+    }
+  }
   .el-breadcrumb {
-    border: 1px solid #ddd;
     padding: 10px 10px;
     background: #fff;
     font-size: 14px;
-    margin-bottom: 15px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

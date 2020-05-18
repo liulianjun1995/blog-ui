@@ -1,12 +1,12 @@
 <template>
-  <div class="nav-box">
-    <div class="box-title">
-      分类导航
-    </div>
-    <template v-for="(item, index) in article">
-      <router-link :key="index + 'article-nav'" :class="{ active: item.title === current }" :to="{ name: item.title }">{{ item.title }}</router-link>
-    </template>
-  </div>
+  <el-card class="nav-box" shadow="never">
+    <div class="box-title">分类导航</div>
+    <el-row :gutter="10">
+      <el-col v-for="(item, index) in article" :key="index" :span="12">
+        <router-link :key="index + 'article-nav'" :class="{ active: item.title === current }" :to="{ name: item.title }">{{ item.title }}</router-link>
+      </el-col>
+    </el-row>
+  </el-card>
 </template>
 
 <script>
@@ -53,8 +53,7 @@ export default {
     background: #fff;
     color: #333;
     font-size: 14px;
-    padding: 10px;
-    min-height: 220px;
+    padding: 0 10px;
     height: 100%;
     border: 1px solid #ddd;
     .box-title {
@@ -72,7 +71,6 @@ export default {
       color: #444;
       padding: 7px 1%;
       margin: 5px 0;
-      width: 46%;
       text-align: center;
       line-height: 19px;
       word-break: all;
@@ -83,12 +81,6 @@ export default {
       &:hover {
         border: 1px solid #5FB878;
         color: #5FB878;
-      }
-      &:nth-child(even) {
-        float: left;
-      }
-      &:nth-child(odd) {
-        float: right;
       }
       &.active {
         background: #5FB878;

@@ -1,5 +1,5 @@
 <template>
-  <div class="info">
+  <el-card class="info" shadow="never">
     <div class="info-avatar">
       <img :src="info.avatar" :alt="info.nickname">
     </div>
@@ -35,7 +35,7 @@
     <div class="info-runtime">
       博客已运行 <span class="runtime">{{ runtime }}</span>
     </div>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -113,7 +113,9 @@ export default {
 
 <style scoped lang="scss">
   .info {
-    padding: 10px;
+    /deep/ .el-card__body {
+      padding: 10px;
+    }
     text-align: center;
     background-color: #fff;
     border: 1px solid #ddd;

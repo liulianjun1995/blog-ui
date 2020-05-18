@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel">
+  <el-card class="carousel" shadow="never">
     <el-carousel ref="carousel" :height="carouselHeight + 'px'">
       <el-carousel-item v-for="(carousel, index) in carousels" :key="index">
         <p class="carousel-title">{{ carousel.title }}</p>
@@ -9,7 +9,7 @@
         />
       </el-carousel-item>
     </el-carousel>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -54,22 +54,25 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    .carousel {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      padding: 5px;
-      .el-carousel {
-        overflow: hidden;
-        cursor: pointer;
-        .carousel-title {
-          z-index: 2;
-          position: absolute;
-          color: #ffffff;
-          margin: 5px;
-          padding: 5px 10px;
-          background-color: rgba(0,0,0,.3);
-          font-size: 15px;
-        }
+  .carousel {
+    /deep/ .el-card__body {
+      padding: unset;
+    }
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 5px;
+    .el-carousel {
+      overflow: hidden;
+      cursor: pointer;
+      .carousel-title {
+        z-index: 2;
+        position: absolute;
+        color: #ffffff;
+        margin: 5px;
+        padding: 5px 10px;
+        background-color: rgba(0,0,0,.3);
+        font-size: 15px;
       }
     }
+  }
 </style>

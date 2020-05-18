@@ -1,9 +1,7 @@
 <template>
   <div class="article-list">
-    <el-row>
-      <el-col :span="24">
-        <breadcrumb />
-      </el-col>
+    <el-row class="margin-bottom-xs">
+      <breadcrumb />
     </el-row>
     <el-row :gutter="10">
       <el-col class="margin-bottom-xs" :xs="24" :sm="24" :md="16" :lg="16" :xl="16">

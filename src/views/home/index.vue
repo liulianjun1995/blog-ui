@@ -2,12 +2,12 @@
   <div class="app-container">
     <el-row class="margin-bottom-xs">
       <el-col :span="24">
-        <Tip />
+        <tip />
       </el-col>
     </el-row>
     <el-row :gutter="10">
       <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16" class="margin-bottom-xs">
-        <Carousel class="margin-bottom-xs" />
+        <carousel class="margin-bottom-xs" />
         <article-box type="top" class="margin-bottom-xs" />
         <article-box type="new" />
       </el-col>

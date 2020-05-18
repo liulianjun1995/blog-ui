@@ -88,7 +88,7 @@ export default {
     background-color: #ffffff;
     height: auto;
     position: absolute;
-    left: 0;
-    top: 40px;
+    left: 20px;
+    bottom: 30px;
   }
 </style>
